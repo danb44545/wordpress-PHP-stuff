@@ -1,0 +1,31 @@
+
+# Put this php file in the same place wp-config.php is located
+
+
+
+
+If you wanted to create your own .php file and interact with Wordpress without 404 Headers and keeping your current permalink structure there is NO Need for a Template file for that 1 page, I found that this approach works best, in your .php file:
+<?php
+    require_once(dirname(__FILE__) . '/wp-config.php');
+    $wp->init();
+    $wp->parse_request();
+    $wp->query_posts();
+    $wp->register_globals();
+    $wp->send_headers();
+// Your Wordpress Functions here...
+    echo site_url();
+?>
+Than you can simply perform any wordpress functions after this. Also, this assumes that your .php file is within the root of your wordpress site where your wp-config.php file is located.
+This, to me, is a PRICELESS discovery as I was using require_once(dirname(__FILE__) . '/wp-blog-header.php'); for the longest time as Wordpress even tells you that this is the approach that you should use to integrate Wordpress Functions, cept, it causes 404 headers, which is weird that they would want you to use this approach. https://codex.wordpress.org/Integrating_WordPress_with_Your_Website
+I know many people have answered this question and it already has an accepted answer, but here is a nice approach for a .php file within the root of your wordpress site (or technically anywhere you want in your site), that you can browse to and load without 404 Headers!
+EDIT
+Just a quick update here. There is a way to use wp-blog-header.php without 404 headers, but this requires that you add in the headers manually, something like this will work in the root of your wordpress install:
+<?php
+    require_once(dirname(__FILE__) . '/wp-blog-header.php');
+    header("HTTP/1.1 200 OK");
+    header("Status: 200 All rosy");
+// Your Wordpress Functions here...
+    echo site_url();
+?>
+
+From <https://stackoverflow.com/questions/2810124/how-to-add-a-php-page-to-wordpress> 
