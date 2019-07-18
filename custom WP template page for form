@@ -1,0 +1,31 @@
+Note: this is a sample template page which will include the header but not include the footers (the rest of the posts).
+
+You would create one of these for each PHP page equivalent you would have in an ordinary website then you would create a standard "page" in wordpress for each "php page" then apply the custom template page to each page. this is essentially linking the php template page to the wordpress "page" which is a placeholder. That way you can have a "real" website inside your wordpress site.
+
+
+
+<?php
+/*
+Template Name: Contact Us
+ */
+get_header(); ?>
+<div id="primary">
+<div id="content" role="main">
+
+<form method="post" id="contactus_form">
+Your Name:<input type="text" name="yourname" id="yourname" rows="1" value="" />
+<br /><br />
+Your Email:<input type="text" name="email" id="email" rows="1" value="" />
+<br /><br />
+Subject:<input type="text" name="subject" id="subject" rows="1" value=""></p>
+<br /><br />
+Leave a Message:<textarea name="message" id="message" ></textarea>
+<br /><br />
+<input type="submit" name="submit" id="submit" value="Send"/>
+</form>
+
+<?php echo "hello world"; ?>
+
+
+</div><!-- #content -->
+</div><!-- #primary -->
